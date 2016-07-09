@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://polygit.org/components/webcomponentsjs/webcomponents-lite.min.js"></script>
+  <link rel="import" href="https://polygit.org/components/polymer/polymer.html" />
+  <link rel="import" href="alert-element.html" />
+</head>
+<body>
+  <alert-element></alert-element>
+  <dom-module id="alert-element">
+    <template>
+      <h2 id="alertHead"></h2>
+      <ul class="alert-list-inner">
+        <li>alert1</li>
+        <li>alert2</li>
+      </ul>
+    </template>
+  </dom-module>
+  <script>
+    Polymer({
+      is: "alert-element"
+    });
+  </script>
+  <script>
+    var el = document.querySelector('alert-element');
+    el.addEventListener('click', function(event) {
+      var normalizedEvent = Polymer.dom(event);
+      console.info('rootTarget is:', normalizedEvent.rootTarget);
+      console.info('localTarget is:', normalizedEvent.localTarget);
+      console.info('path is:', normalizedEvent.path);
+    });
+  </script>
+</body>
+</html>
