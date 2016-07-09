@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://polygit.org/components/webcomponentsjs/webcomponents-lite.min.js"></script>
+  <script>
+    /* this script must run before Polymer is imported */
+    // ONLY WORKS IN OPERA AND CHROME
+    window.Polymer = {
+      dom: 'shadow',
+      lazyRegister: true
+    };
+  </script>
+  <link rel="import" href="https://polygit.org/components/polymer/polymer.html" />
+</head>
+<body>
+  <style>
+    alert-element::shadow li {
+      background-color: #4444ff; /* Blue Background */
+    }
+    alert-element /deep/ li {
+      border: 3px solid #993333; /* Thick Red */
+    }
+  </style>
+  <alert-element>
+    <ul class="alert-list">
+      <li>Alert List 4</li>
+    </ul>
+  </alert-element>
+  <dom-module id="alert-element">
+    <template>
+      <style>
+        :host {
+          border: 1px solid #000000; /* Thin Black */
+          display: block;
+        }
+        :host ::content ul {
+          border: 4px solid #000000; /* Thick Black */
+        }
+      </style>
+      <h2 id="alertHead"></h2>
+      <ul class="alert-list-inner">
+        <li>Alert 1</li>
+        <li>Alert 2</li>
+        <li>Alert 3</li>
+      </ul>
+      <content></content>
+    </template>
+  </dom-module>
+  <script>
+    HTMLImports.whenReady(function() {
+      Polymer({
+        is: "alert-element"
+      });
+    });
+  </script>
+</body>
+</html>
