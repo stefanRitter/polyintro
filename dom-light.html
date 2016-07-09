@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://polygit.org/components/webcomponentsjs/webcomponents-lite.min.js"></script>
+  <link rel="import" href="https://polygit.org/components/polymer/polymer.html" />
+</head>
+<body>
+  <alert-element><ul class="alert-list"><li>Alert List 4</li></ul></alert-element>
+  <dom-module id="alert-element">
+    <template>
+      <!-- Local DOM -->
+      <h2 id="alertHead"></h2>
+      <ul class="alert-list-inner">
+        <li>Alert 1</li>
+        <li>Alert 2</li>
+        <li>Alert 3</li>
+      </ul>
+      <content></content>
+    </template>
+  </dom-module>
+  <script>
+    HTMLImports.whenReady(function() {
+      Polymer({
+        is: "alert-element",
+        ready: function() {
+          console.log("this", this); // class
+          console.log("this.root", this.root); // local dom
+          console.log("this.$", this.$); // template
+          console.log(Polymer.dom(this).children);
+
+          var lightDomDiv = document.querySelector("alert-element").querySelector(".alert-list");
+          console.log("lightDomDiv", lightDomDiv);
+
+          //Because retrieving the children of a given content tag is a common pattern,
+          //the element API includes getContentChildNodes and getContentChildren utility methods
+          var contentChildren = this.getContentChildren('content')[0];
+          console.log("contentChildren", contentChildren);
+
+          //Returns a list of effective child nodes for this element.
+          var effectiveChildrenNodes = Polymer.dom(this).getEffectiveChildNodes();
+          console.log("effectiveChildrenNodes", effectiveChildrenNodes);
+
+          //Returns a list of effective child elements for this element.
+          var effectiveChildren = this.getEffectiveChildren();
+          console.log("effectiveChildren", effectiveChildren);
+
+          //getDestinationInsertionPoints only returns useful results when called on an element that’s being distributed.
+          var insertedTo = Polymer.dom(lightDomDiv).getDestinationInsertionPoints()[0];
+          console.log("insertedTo", insertedTo);
+
+          var insertionPoint = Polymer.dom(this.root).querySelector('content');
+          //Note that getDistributedNodes only returns useful results when called on a <content> element, and
+          var distributed = Polymer.dom(insertionPoint).getDistributedNodes()[0];
+          console.log("distributed", distributed);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

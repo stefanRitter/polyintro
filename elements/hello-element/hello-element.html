@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <dom-module id="hello-element">
+      <template>
+        Hello There
+      </template>
+    </dom-module>
+
+    <script type="text/javascript">
+      HTMLImports.whenReady(function () {
+        Polymer({
+          is: "hello-element"
+        });
+      });
+    </script>
+  </body>
+</html>

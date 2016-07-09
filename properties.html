@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://polygit.org/components/webcomponentsjs/webcomponents-lite.min.js"></script>
+    <link rel="import" href="https://polygit.org/components/polymer/polymer.html" />
+  </head>
+  <body>
+
+  <alert-element></alert-element>
+
+
+  <dom-module id="alert-element">
+    <template>
+      <p>[[message]]</p>
+      <p>[[alertUpdateTime]]</p>
+    </template>
+  </dom-module>
+
+
+  <script>
+    HTMLImports.whenReady(function () {
+      Polymer({
+          is: "alert-element",
+          properties:{
+            message: {
+              type: String, // Boolean, Date, Number, String, Array, Object
+              value: 'hello prop',
+              refelctToAttribute: true
+            },
+            alertUpdateTime:{
+              type: Date,
+              value: function(){
+                return new Date();
+              }
+            }
+          }
+      });
+    });
+
+    /*
+    properties:{
+      someProp: {
+        type,
+        value,
+        refelctToAttribute,
+        readOnly,
+        notify,
+        computed,
+        observer
+      }
+    }
+    */
+  </script>
+  </body>
+</html>

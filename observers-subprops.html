@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <script src="https://polygit.org/components/webcomponentsjs/webcomponents-lite.min.js"></script>
+        <link rel="import" href="https://polygit.org/components/polymer/polymer.html" />
+    </head>
+    <body>
+
+    <alert-element></alert-element>
+
+    <dom-module id="alert-element">
+      <template>
+          <div hidden$="{{!loadStatus.loading}}">loading (<span>{{loadStatus.percent}}%</span>)...</div>
+          [[message]]
+          <paper-input value="{{message}}"></paper-input>
+      </template>
+    </dom-module>
+
+    <script>
+      HTMLImports.whenReady(function () {
+        Polymer({
+            is: "alert-element",
+            properties:{
+                message:{
+                    type: String,
+                    value: "hello"
+                },
+                loadStatus:{
+                    type: Object,
+                    value: function(){
+                        return { percent: 0, loading: true }
+                    }
+                }
+            },
+            observers:[
+                'loadingCheck(loadStatus.percent)',
+                'loadingCheckAll(loadStatus.*)'
+            ],
+            loadingCheckAll: function(changeRecord){
+              console.log(changeRecord);
+            },
+            loadingCheck: function(loadingPercentange){
+              console.log(loadingPercentange, '%');
+            },
+            ready: function(){
+              this.message = "Not quite my tempo.";
+              this.loadStatus.percent = 10;
+              this.set("loadStatus.percent", 20);
+            }
+        });
+      });
+    </script>
+    </body>
+</html>
